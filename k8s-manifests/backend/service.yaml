@@ -4,12 +4,13 @@ metadata:
   name: backend-service
   namespace: backend
 spec:
-  type: ClusterIP
+  type: NodePort           # Exposed via NodePort
   selector:
     app: backend
   ports:
-  - protocol: TCP
-    port: 5000
-    targetPort: 5000
+    - protocol: TCP
+      port: 5000           # Internal cluster port
+      targetPort: 5000     # Pod port
+      nodePort: 30008      # NodePort (must be between 30000-32767)
 
 
