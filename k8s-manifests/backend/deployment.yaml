@@ -15,15 +15,10 @@ spec:
     spec:
       containers:
       - name: backend
-        image: maqsoodbangash/three-tier:v5 
+        image: misacademy/backend:v3
         ports:
         - containerPort: 5000
-        env:
-        - name: MONGO_URI
-          valueFrom:
-            secretKeyRef:
-              name: mongo-secret
-              key: MONGO_URI
+
         resources:
           requests:
             cpu: "200m"
@@ -31,16 +26,35 @@ spec:
           limits:
             cpu: "500m"
             memory: "512Mi"
+
         livenessProbe:
           httpGet:
             path: /api/items
             port: 5000
           initialDelaySeconds: 15
           periodSeconds: 20
+          timeoutSeconds: 5
+          failureThreshold: 3
+
         readinessProbe:
           httpGet:
             path: /api/items
             port: 5000
           initialDelaySeconds: 10
           periodSeconds: 15
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+        env:
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: MONGO_URI
+
+        - name: BACKEND_DB
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: REACT_APP_API_BASE_URL
 

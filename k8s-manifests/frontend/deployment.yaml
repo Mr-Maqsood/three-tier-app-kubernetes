@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: maqsoodbangash/three-tier:v3 
+        image: misacademy/frontend:v3
         ports:
         - containerPort: 3000
         resources:
@@ -27,14 +27,21 @@ spec:
             memory: "512Mi"
         livenessProbe:
           httpGet:
-            path: /api/items
+            path: /
             port: 3000
           initialDelaySeconds: 10
           periodSeconds: 15
         readinessProbe:
           httpGet:
-            path: /api/items
+            path: /
             port: 3000
           initialDelaySeconds: 5
           periodSeconds: 10
+        env:
+            - name: BACKEND_IP_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-config
+                  key: REACT_APP_API_BASE_URL
+
 
