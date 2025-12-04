@@ -1,3 +1,4 @@
+# PersistentVolume
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -10,5 +11,4 @@ spec:
   hostPath:
     path: "/data/mongo"
   storageClassName: standard-storage
----
 
