@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: maqsoodbangash/three-tier-frontend:v1
+        image: maqsoodbangash/three-tier-frontend:v2
         ports:
         - containerPort: 3000
         resources:

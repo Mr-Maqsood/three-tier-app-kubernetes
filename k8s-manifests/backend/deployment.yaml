@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: maqsoodbangash/three-tier-backend:v1
+        image: maqsoodbangash/three-tier-backend:v2
         ports:
         - containerPort: 5000
 
